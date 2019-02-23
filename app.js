@@ -49,6 +49,12 @@ app.locals.title = 'Banjo Rooms - Because a room without jazz is not a room';
 const index = require('./routes/index');
 app.use('/', index);
 
+const rooms = require('./routes/rooms');
+app.use('/rooms', rooms);
+
+const users = require('./routes/users');
+app.use('/users', users);
+
 // catch 404 and render a not-found.hbs template
 app.use((req, res, next) => {
     res.status(404);
