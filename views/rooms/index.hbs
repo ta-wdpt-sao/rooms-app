@@ -3,3 +3,13 @@
 <p>
     <a href="/rooms/add">Add</a>
 </p>
+
+{{#each rooms}}
+    <p>    
+        <a href="/rooms/{{_id}}">
+            {{name}}
+        </a><br />
+        <a href="/rooms/edit/{{_id}}" class="btn btn-primary btn-sm">Edit</a> |
+        <a href="/rooms/delete/{{_id}}" class="btn btn-primary btn-sm">Delete</a>
+    </p>
+{{/each}}

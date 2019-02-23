@@ -1,0 +1,22 @@
+<div class="container">
+    {{#with room}}
+
+        <h1>{{name}}</h1>
+        <hr class="my-4" />
+
+        {{#if imageUrl}}
+            <p>
+                <img src="{{imageUrl}}" alt="{{name}} picture"></span>
+            </p>
+        {{/if}}
+
+        <p>{{description}}</p>
+
+        <hr class="my-4" />
+
+    {{/with}}
+
+    <hr class="my-4" />
+
+    <a href="/rooms">Return</a>
+</div>
