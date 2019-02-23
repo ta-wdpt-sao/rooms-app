@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const roomSchema = new Schema({
@@ -12,6 +12,8 @@ const roomSchema = new Schema({
     timestamps: true
 });
 
-const Room = mongoose.model("Room", roomSchema);
+roomSchema.index({location: '2dsphere'});
+
+const Room = mongoose.model('Room', roomSchema);
 
 module.exports = Room;
