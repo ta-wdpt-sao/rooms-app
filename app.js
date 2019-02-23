@@ -52,6 +52,9 @@ app.use('/', index);
 const rooms = require('./routes/rooms');
 app.use('/rooms', rooms);
 
+const reviews = require('./routes/reviews');
+app.use('/reviews', reviews);
+
 const users = require('./routes/users');
 app.use('/users', users);
 

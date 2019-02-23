@@ -2,48 +2,48 @@
     <h1>{{#if room._id}}edit{{else}}add{{/if}} room</h1>
 
     {{#with room}}
-    <form id="form" action="/rooms/{{#if _id}}edit{{else}}add{{/if}}" method="POST">
-      <input type="hidden" id="_id" name="_id" value="{{_id}}">
+      <form id="form" action="/rooms/{{#if _id}}edit{{else}}add{{/if}}" method="POST">
+        <input type="hidden" id="_id" name="_id" value="{{_id}}">
 
-      <div class="form-group">
-        <label for="name">name</label><br>
-        <input type="text" class="form-control" id="name" name="name"
-          placeholder="add rooms name"
-          value="{{name}}">        
-      </div>
+        <div class="form-group">
+          <label for="name">name</label><br>
+          <input type="text" class="form-control" id="name" name="name"
+            placeholder="add rooms name"
+            value="{{name}}">        
+        </div>
 
-      <div class="form-group">
-        <label for="description">description</label><br>
-        <textarea class="form-control" id="description" name="description"
-          placeholder="add rooms description">{{description}}</textarea>
-      </div>
+        <div class="form-group">
+          <label for="description">description</label><br>
+          <textarea class="form-control" id="description" name="description"
+            placeholder="add rooms description">{{description}}</textarea>
+        </div>
 
-      <div class="form-group">
-        <label for="imageUrl">room img</label><br>
-        <input type="text" class="form-control" id="imageUrl" name="imageUrl"
-          placeholder="add URL for room img"
-          value="{{imageUrl}}">        
-      </div>
+        <div class="form-group">
+          <label for="imageUrl">room img</label><br>
+          <input type="text" class="form-control" id="imageUrl" name="imageUrl"
+            placeholder="add URL for room img"
+            value="{{imageUrl}}">        
+        </div>
 
-      <div class="form-group">
-        <label for="latitude">latitude</label><br>
-        <input type="text" class="form-control" id="latitude" name="latitude"
-          placeholder="add latitude"
-          value="{{location.coordinates.[0]}}">
-      </div>
+        <div class="form-group">
+          <label for="latitude">latitude</label><br>
+          <input type="text" class="form-control" id="latitude" name="latitude"
+            placeholder="add latitude"
+            value="{{location.coordinates.[0]}}">
+        </div>
 
-      <div class="form-group">
-        <label for="longitude">longitude</label><br>
-        <input type="text" class="form-control" id="longitude" name="longitude"
-          placeholder="add longitude"
-          value="{{location.coordinates.[1]}}">
-      </div>
+        <div class="form-group">
+          <label for="longitude">longitude</label><br>
+          <input type="text" class="form-control" id="longitude" name="longitude"
+            placeholder="add longitude"
+            value="{{location.coordinates.[1]}}">
+        </div>
 
-      {{#if msgError}}
-        <div class="alert alert-danger">{{ msgError }}</div>
-      {{/if}}
+        {{#if msgError}}
+          <div class="alert alert-danger">{{ msgError }}</div>
+        {{/if}}
 
-      <button class="btn btn-primary btn-block">{{#if _id}}edit{{else}}add{{/if}} room</button>
-    </form>
+        <button class="btn btn-primary btn-block">{{#if _id}}edit{{else}}add{{/if}} room</button>
+      </form>
     {{/with}}
 </div>
