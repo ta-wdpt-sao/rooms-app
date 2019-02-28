@@ -29,8 +29,8 @@ router.post('/add', (req, res, next) => {
 
   const location = {
     type: 'Point',
-    // coordinates: [req.body.longitude, req.body.latitude]
-    coordinates: [-46.6623271, -23.5617326]
+    coordinates: [req.body.longitude, req.body.latitude]
+    // coordinates: [-46.6623271, -23.5617326]
   };
 
   if (name == '') {
