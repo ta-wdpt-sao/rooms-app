@@ -1,1 +1,7 @@
 <h1>Hallo ma frienda!</h1>
+
+<div id="map"></div>
+
+{{#each rooms}}
+    <input type="hidden" class="map-marker" data-lat="{{location.coordinates.[1]}}" data-lng="{{location.coordinates.[0]}}">
+{{/each}}

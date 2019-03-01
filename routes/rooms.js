@@ -24,7 +24,8 @@ router.post('/add', (req, res, next) => {
   const {
     name,
     description,
-    imageUrl
+    imageUrl,
+    address
   } = req.body;
 
   const location = {
@@ -53,6 +54,7 @@ router.post('/add', (req, res, next) => {
       name,
       description,
       imageUrl,
+      address,
       location
     });
 
@@ -83,7 +85,8 @@ router.post("/edit", (req, res, next) => {
   const {
     name,
     description,
-    imageUrl
+    imageUrl,
+    address
   } = req.body;
 
   const location = {
@@ -96,7 +99,9 @@ router.post("/edit", (req, res, next) => {
     { $set: {
       name,
       description,
-      imageUrl
+      imageUrl,
+      address,
+      location
      }
     },
     { new: true } 

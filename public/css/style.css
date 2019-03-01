@@ -9,4 +9,9 @@ footer {
   position: fixed;
   width: 100%; }
 
+#map {
+  background: #CCC;
+  height: 600px;
+  width: 100%; }
+
 /*# sourceMappingURL=style.css.map */

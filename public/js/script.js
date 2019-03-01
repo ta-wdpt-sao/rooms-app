@@ -19,4 +19,37 @@ $(function(){
             });
         }
     }
+
+    if($('#map').length > 0) {
+        const markers = [];
+        const bounds = new google.maps.LatLngBounds();
+
+        const saoPaulo = {
+            lat: -23.56173216,
+            lng: -46.6623271
+        };
+
+        const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: saoPaulo
+        });
+
+        $('.map-marker').each(function(){
+            const center = {
+              lat: $(this).data('lat'),
+              lng: $(this).data('lng')
+            };
+            bounds.extend(center);
+            const pin = new google.maps.Marker({
+              position: center,
+              map: map
+            });
+            markers.push(pin);
+            map.setCenter(center);
+        });
+
+        if(markers.length > 1) {
+            map.fitBounds(bounds);
+        }
+    }
 });
