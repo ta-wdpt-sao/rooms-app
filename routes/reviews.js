@@ -32,9 +32,6 @@ router.post('/add', (req, res, next) => {
                             return acc + Number(item.rating);
                         }, Number(rating));
 
-                        console.log('ratingTotal', ratingTotal);
-                        console.log('room.reviews.length', room.reviews.length);
-
                         let ratingAvg = Math.floor(ratingTotal / (room.reviews.length + 1));
 
                         Room.update({ _id: roomId }, { rating: ratingAvg, $push: { reviews: review._id }})
