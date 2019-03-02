@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const Room = require('../models/room');
 const Review = require('../models/review');
+const uploadCloud = require('../config/cloudinary.js');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -20,13 +21,14 @@ router.get('/add', (req, res, next) => {
   res.render('rooms/form', { room });
 });
 
-router.post('/add', (req, res, next) => {
+router.post('/add', uploadCloud.single('imageUrl'), (req, res, next) => {
   const {
     name,
     description,
-    imageUrl,
     address
   } = req.body;
+
+  const imageUrl = req.file.url;
 
   const location = {
     type: 'Point',
@@ -79,15 +81,16 @@ router.get('/edit/:id', (req, res, next) => {
     });
 });
 
-router.post("/edit", (req, res, next) => {
+router.post("/edit", uploadCloud.single('imageUrl'), (req, res, next) => {
   const roomId = req.body._id;
 
   const {
     name,
     description,
-    imageUrl,
     address
   } = req.body;
+
+  const imageUrl = req.file.url;
 
   const location = {
     type: 'Point',

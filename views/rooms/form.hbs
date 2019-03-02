@@ -2,7 +2,7 @@
     <h1>{{#if room._id}}edit{{else}}add{{/if}} room</h1>
 
     {{#with room}}
-      <form id="form" action="/rooms/{{#if _id}}edit{{else}}add{{/if}}" method="POST">
+      <form id="form" action="/rooms/{{#if _id}}edit{{else}}add{{/if}}" method="POST" enctype="multipart/form-data">
         <input type="hidden" id="_id" name="_id" value="{{_id}}">
 
         <div class="form-group">
@@ -20,7 +20,7 @@
 
         <div class="form-group">
           <label for="imageUrl">room img</label><br>
-          <input type="text" class="form-control" id="imageUrl" name="imageUrl"
+          <input type="file" class="form-control" id="imageUrl" name="imageUrl"
             placeholder="add URL for room img"
             value="{{imageUrl}}">        
         </div>
