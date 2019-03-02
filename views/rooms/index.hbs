@@ -1,15 +1,19 @@
-<h1>Rooms - index</h1>
+<div class="container">
 
-<p>
-    <a href="/rooms/add">Add</a>
-</p>
+    <h1>Rooms - index</h1>
 
-{{#each rooms}}
-    <p>    
-        <a href="/rooms/{{_id}}">
-            {{name}}
-        </a><br />
-        <a href="/rooms/edit/{{_id}}" class="btn btn-primary btn-sm">Edit</a> |
-        <a href="/rooms/delete/{{_id}}" class="btn btn-primary btn-sm">Delete</a>
+    <p>
+        <a href="/rooms/add">Add</a>
     </p>
-{{/each}}
+
+    {{#each rooms}}
+        <p>    
+            <a href="/rooms/{{_id}}">
+                {{name}}
+            </a><br />
+            <a href="/rooms/edit/{{_id}}" class="btn btn-primary btn-sm">Edit</a> |
+            <a href="/rooms/delete/{{_id}}" class="btn btn-primary btn-sm">Delete</a>
+        </p>
+    {{/each}}
+
+</div>
