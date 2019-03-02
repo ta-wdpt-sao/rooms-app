@@ -29,6 +29,7 @@ router.post('/add', uploadCloud.single('imageUrl'), (req, res, next) => {
   } = req.body;
 
   const imageUrl = req.file.url;
+  const imagePublicId = req.file.public_id;
 
   const location = {
     type: 'Point',
@@ -56,6 +57,7 @@ router.post('/add', uploadCloud.single('imageUrl'), (req, res, next) => {
       name,
       description,
       imageUrl,
+      imagePublicId,
       address,
       location
     });
@@ -91,6 +93,7 @@ router.post("/edit", uploadCloud.single('imageUrl'), (req, res, next) => {
   } = req.body;
 
   const imageUrl = req.file.url;
+  const imagePublicId = req.file.public_id;
 
   const location = {
     type: 'Point',
@@ -103,6 +106,7 @@ router.post("/edit", uploadCloud.single('imageUrl'), (req, res, next) => {
       name,
       description,
       imageUrl,
+      imagePublicId,
       address,
       location
      }
