@@ -8,7 +8,8 @@ const roomSchema = new Schema({
     address: { type: String },
     location: { type: { type: String}, coordinates: [Number] },
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
-    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }]
+    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
+    rating: { type: Number }
 }, {
     timestamps: true
 });

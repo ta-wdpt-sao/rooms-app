@@ -9,8 +9,16 @@
                 <div class="card">
                     <img src="{{imageUrl}}" class="card-img-top" />
                     <div class="card-body">
-                        <h5 class="card-title">{{name}}</h5>
-                        <p class="card-text">{{description}}</p>
+                        <h5 class="card-title">
+                            {{name}}
+                            <span class="badge badge-secondary">{{rating}}</span>
+                        </h5>
+                        <p class="card-text">
+                            {{description}}
+                        </p>
+                        <p class="text-muted">
+                            {{address}}
+                        </p>
                         <a href="/rooms/{{_id}}" class="btn btn-primary">Details</a>
                     </div>
                     <input type="hidden" class="map-marker" data-lat="{{location.coordinates.[1]}}" data-lng="{{location.coordinates.[0]}}">

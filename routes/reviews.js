@@ -16,6 +16,7 @@ router.post('/add', (req, res, next) => {
     }
 
     Room.findOne({ _id: roomId })
+        .populate('reviews')
         .then(room => {
             if (room == null) {
                 res.redirect('/rooms');
@@ -26,12 +27,21 @@ router.post('/add', (req, res, next) => {
                 });
 
                 newReview.save()
-                    .then(review => {
-                        Room.update({ _id: roomId }, { $push: { reviews: review._id }})
+                    .then(review => {                        
+                        let ratingTotal = room.reviews.reduce((acc, item) => {
+                            return acc + Number(item.rating);
+                        }, Number(rating));
+
+                        console.log('ratingTotal', ratingTotal);
+                        console.log('room.reviews.length', room.reviews.length);
+
+                        let ratingAvg = Math.floor(ratingTotal / (room.reviews.length + 1));
+
+                        Room.update({ _id: roomId }, { rating: ratingAvg, $push: { reviews: review._id }})
                             .then(book => {
                                 res.redirect(`/rooms/${roomId}`)
                             })
-                            .catch((error) => {
+                            .catch((err) => {
                                 throw new Error(err);
                             });
                     })
