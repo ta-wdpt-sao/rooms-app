@@ -8,7 +8,7 @@ const passport = require("passport");
 router.get("/login", (req, res, next) => {
     let user = new User();
     user._id = null;
-    res.render("auth/login", { user });
+    res.render("auth/login", { user, errorMessage: req.flash('error') });
 });
 
 router.post("/login", passport.authenticate("local", {
@@ -27,24 +27,22 @@ router.post("/signup", (req, res, next) => {
     } = req.body;
 
     if (email == '' || password == '') {
-      res.render('auth/login', {
-        user: {}, errorMessage: `E-mail and password can't be empty`
-      });
+      req.flash('error', 'E-mail and password can\'t be empty!')
+      res.redirect('/login');
       return;
     }
 
     User.findOne({ "email": email })
     .then(user => {
       if (user !== null) {
-        res.render("auth/login", {
-            user: {}, errorMessage: "The email already exists!"
-        });
+        req.flash('error', 'The email already exists!')
+        res.redirect('/login');
         return;
       }
-  
+
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashPass = bcrypt.hashSync(password, salt);
-  
+
       const newUser = new User({
         fullName,
         imageUrl,
@@ -59,7 +57,11 @@ router.post("/signup", (req, res, next) => {
       .catch(err => { throw new Error(err)});
     })
     .catch(err => { throw new Error(err)});
-  
+});
+
+router.get("/logout", (req, res, next) => {
+  req.logout();
+  res.redirect("/");
 });
 
 module.exports = router;

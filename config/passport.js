@@ -38,10 +38,10 @@ passport.use(new LocalStrategy({
         return done(err);
         }
         if (!user) {
-        return done(null, false, { message: "Incorrect username" });
+            return done(null, false, { message: "Incorrect e-mail" });
         }
         if (!bcrypt.compareSync(password, user.password)) {
-        return done(null, false, { message: "Incorrect password" });
+            return done(null, false, { message: "Incorrect password" });
         }
 
         return done(null, user);
