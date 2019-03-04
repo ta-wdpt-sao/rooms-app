@@ -22,6 +22,7 @@ router.post('/add', (req, res, next) => {
                 res.redirect('/rooms');
             } else {
                 const newReview = new Review({
+                    user: req.user._id,
                     rating,
                     comment
                 });

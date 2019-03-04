@@ -59,7 +59,8 @@ router.post('/add', uploadCloud.single('imageUrl'), (req, res, next) => {
       imageUrl,
       imagePublicId,
       address,
-      location
+      location,
+      owner: req.user._id
     });
 
     newRoom.save()
@@ -155,7 +156,7 @@ router.get('/:id', (req, res, next) => {
   if (!/^[0-9a-fA-F]{24}$/.test(roomId)) return res.status(404).send('not-found');
 
   Room.findOne({ _id: roomId })
-    .populate('reviews')
+    .populate({path: 'reviews', populate: { path: 'user' }})
     .then(room => {
       res.render('rooms/detail', { room });
     })
