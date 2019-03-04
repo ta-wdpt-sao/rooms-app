@@ -1,19 +1,25 @@
-<div class="container">
+<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-8">
+            <h1>Rooms</h1>
+        </div>
+        <div class="col-4 text-right">
+            {{#if currentUser}}
+                <a href="/rooms/add" class="btn btn-success">
+                    Create new room
+                    <i class="fas fa-plus-circle"></i>
+                </a>
+            {{/if}}
+        </div>
+    </div>
 
-    <h1>Rooms - index</h1>
+    <hr />
+</div>
 
-    <p>
-        <a href="/rooms/add">Add</a>
-    </p>
-
-    {{#each rooms}}
-        <p>    
-            <a href="/rooms/{{_id}}">
-                {{name}}
-            </a><br />
-            <a href="/rooms/edit/{{_id}}" class="btn btn-primary btn-sm">Edit</a> |
-            <a href="/rooms/delete/{{_id}}" class="btn btn-primary btn-sm">Delete</a>
-        </p>
-    {{/each}}
-
+<div class="container-fluid py-4">
+    <div class="row">
+        {{#each rooms}}
+            {{> room}}
+        {{/each}}
+    </div>
 </div>

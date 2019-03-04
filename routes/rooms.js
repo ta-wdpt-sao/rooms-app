@@ -1,13 +1,26 @@
 const express = require('express');
 const router  = express.Router();
 const Room = require('../models/room');
-const Review = require('../models/review');
 const uploadCloud = require('../config/cloudinary.js');
+const cloudinary = require('cloudinary');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
   Room.find({})
     .then(rooms => {
+      rooms.forEach(room => {
+        if(room.owner && room.owner.equals(req.user._id)) {
+          room.owned = true;
+        }
+
+        if(room.imageUrl) {
+          room.imageUrl = cloudinary.url(
+            room.imagePublicId,
+            { gravity: "center", height: 200, width: 300, crop: "fill" }
+          );
+        }
+      });
+
       res.render('rooms/index', { rooms });
     })
     .catch(error => {

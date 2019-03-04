@@ -14,6 +14,10 @@ router.get('/', (req, res, next) => {
   Room.find({})
     .then(rooms => {
       rooms.forEach(room => {
+        if(room.owner && room.owner.equals(req.user._id)) {
+          room.owned = true;
+        }
+
         if(room.imageUrl) {
           room.imageUrl = cloudinary.url(
             room.imagePublicId,

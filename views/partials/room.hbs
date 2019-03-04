@@ -1,0 +1,25 @@
+<div class="col-3 pb-4">
+    <div class="card">
+        <img src="{{imageUrl}}" class="card-img-top" />
+        <div class="card-body">
+            <h5 class="card-title">
+                {{name}}
+            </h5>
+            {{> rating}}
+            <p class="card-text">
+                {{description}}
+            </p>
+            <p class="text-muted">
+                {{address}}
+            </p>
+            <a href="/rooms/{{_id}}" class="btn btn-primary">Details</a>
+        </div>
+        {{#if owned}}
+            <div class="card-footer">
+                <a href="/rooms/edit/{{_id}}" class="btn btn-secondary btn-sm">Edit</a>
+                <a href="/rooms/delete/{{_id}}" class="btn btn-outline-dark btn-sm float-right">Delete</a>
+            </div>
+        {{/if}}
+        <input type="hidden" class="map-marker" data-lat="{{location.coordinates.[1]}}" data-lng="{{location.coordinates.[0]}}">
+    </div>
+</div>
