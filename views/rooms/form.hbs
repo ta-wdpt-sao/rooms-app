@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <h1>{{#if room._id}}edit{{else}}add{{/if}} room</h1>
+<div class="container py-4">
+    <h1>{{#if room._id}}Edit your{{else}}Create a new{{/if}} room</h1>
 
     {{#with room}}
       <form id="form" action="/rooms/{{#if _id}}edit{{else}}add{{/if}}" method="POST" enctype="multipart/form-data">
@@ -50,7 +50,7 @@
           <div class="alert alert-danger">{{ msgError }}</div>
         {{/if}}
 
-        <button class="btn btn-primary btn-block">{{#if _id}}edit{{else}}add{{/if}} room</button>
+        <button class="btn btn-primary btn-block">{{#if _id}}Edit{{else}}Create{{/if}}</button>
       </form>
     {{/with}}
 </div>
