@@ -1,18 +1,23 @@
 <div class="container py-5">
     {{#with room}}
 
-        <h1>{{name}} <span class="badge badge-secondary">{{rating}}</span></h1>
-        <hr class="my-4" />
+        <div class="row">
+            <div class="col-6">
+                {{#if imageUrl}}
+                    <img src="{{imageUrl}}" alt="{{name}} picture" width="100%"></span>
+                {{/if}}
+            </div>
+            <div class="col-6">
+                <h1>{{name}} <span class="badge badge-secondary">{{rating}}</span></h1>
+                <span class="text-muted">by <a class="text-muted" href="/users/{{owner._id}}">{{owner.fullName}}</a></span>
 
-        {{#if imageUrl}}
-            <p>
-                <img src="{{imageUrl}}" alt="{{name}} picture" width="100%"></span>
-            </p>
-        {{/if}}
+                <hr class="my-4" />
 
-        <p>{{description}}</p>
+                <p>{{description}}</p>
+            </div>
+        </div>
 
-        <div id="map"></div>
+        <div id="map" class="mt-5"></div>
 
         <input type="hidden" class="map-marker" data-lat="{{location.coordinates.[1]}}" data-lng="{{location.coordinates.[0]}}">
 

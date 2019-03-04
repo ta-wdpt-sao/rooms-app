@@ -156,7 +156,8 @@ router.get('/:id', (req, res, next) => {
   if (!/^[0-9a-fA-F]{24}$/.test(roomId)) return res.status(404).send('not-found');
 
   Room.findOne({ _id: roomId })
-    .populate({path: 'reviews', populate: { path: 'user' }})
+    .populate('owner')
+    .populate({ path: 'reviews', populate: { path: 'user' } })
     .then(room => {
       res.render('rooms/detail', { room });
     })
