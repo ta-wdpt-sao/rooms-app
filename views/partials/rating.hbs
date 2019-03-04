@@ -1,0 +1,11 @@
+<div class="rating rating-{{rating}} pb-2">
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+
+    {{#if reviews}}
+        <small class="text-muted pl-2">({{ reviews.length }} reviews)</small>
+    {{/if}}
+</div>

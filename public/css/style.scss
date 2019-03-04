@@ -22,3 +22,49 @@ footer {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.rating {
+    i {
+        color: #CCC;
+    }
+
+    &.rating-1,
+    &.rating-2,
+    &.rating-3,
+    &.rating-4,
+    &.rating-5 {
+        i:nth-child(1) {
+            color: #000;
+        }
+    }
+
+    &.rating-2,
+    &.rating-3,
+    &.rating-4,
+    &.rating-5 {
+        i:nth-child(2) {
+            color: #000;
+        }
+    }
+        
+    &.rating-3,
+    &.rating-4,
+    &.rating-5 {
+        i:nth-child(3) {
+            color: #000;
+        }
+    }
+
+    &.rating-4,
+    &.rating-5 {
+        i:nth-child(4) {
+            color: #000;
+        }
+    }
+
+    &.rating-5 {
+        i:nth-child(5) {
+            color: #000;
+        }
+    }
+}

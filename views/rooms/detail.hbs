@@ -8,7 +8,8 @@
                 {{/if}}
             </div>
             <div class="col-6">
-                <h1>{{name}} <span class="badge badge-secondary">{{rating}}</span></h1>
+                <h1>{{name}}</h1>
+                {{> rating}}
                 <span class="text-muted">by <a class="text-muted" href="/users/{{owner._id}}">{{owner.fullName}}</a></span>
 
                 <hr class="my-4" />
@@ -60,9 +61,10 @@
             {{#each reviews}}
                 <div class="card mt-2">
                     <div class="card-body">
-                        <span class="badge badge-secondary">{{rating}}</span>
+                        {{> rating}}
+
                         <p class="card-text">{{comment}}</p>
-                        <em class="text-muted">{{user.fullName}}</em>
+                        <em class="text-muted">{{user.fullName}} - {{createdAt}}</em>
                     </div>
                 </div>
             {{/each}}
