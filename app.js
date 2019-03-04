@@ -1,14 +1,20 @@
 require('dotenv').config();
 
 const bodyParser = require('body-parser');
+const bcrypt = require("bcrypt");
 const cookieParser = require('cookie-parser');
+const ensureLogin = require("connect-ensure-login");
 const express = require('express');
 const favicon = require('serve-favicon');
+const flash = require("connect-flash");
 const hbs = require('hbs');
-const mongoose = require('mongoose');
-const logger = require('morgan');
-const path = require('path');
 const http = require('http');
+const LocalStrategy = require("passport-local").Strategy;
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const passport = require("passport");
+const path = require('path');
+const session = require("express-session");
 const nodesassmiddleware = require('node-sass-middleware');
 
 mongoose
@@ -38,14 +44,67 @@ app.use(nodesassmiddleware({
     sourceMap: true
 }));
 
+hbs.registerPartials(__dirname + '/views/partials');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
+// passport local config
+app.use(session({
+  secret: "our-passport-local-strategy-app",
+  store: new MongoStore({ url: mongoose.connection }),
+  resave: true,
+  saveUninitialized: true
+}));
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    if (err) { return done(err); }
+    done(null, user);
+  });
+});
+
+app.use(flash());
+
+passport.use(new LocalStrategy({
+  passReqToCallback: true,
+  usernameField: 'email'
+},(req, email, password, done) => {
+  User.findOne({ email }, (err, user) => {
+    if (err) {
+      return done(err);
+    }
+    if (!user) {
+      return done(null, false, { message: "Incorrect username" });
+    }
+    if (!bcrypt.compareSync(password, user.password)) {
+      return done(null, false, { message: "Incorrect password" });
+    }
+
+    return done(null, user);
+  });
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// default value for title local
 app.locals.title = 'Jazz Rooms - Because a room without jazz is not a room';
 
 // routes
+app.use((req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.locals.currentUser = req.user;
+  }
+
+  next();
+});
+
 const index = require('./routes/index');
 app.use('/', index);
 
