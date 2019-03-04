@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
         if(room.imageUrl) {
           room.imageUrl = cloudinary.url(
             room.imagePublicId,
-            { gravity: "center", height: 200, width: 300, crop: "crop" }
+            { gravity: "center", height: 200, width: 300, crop: "fill" }
           );
         }
       });
