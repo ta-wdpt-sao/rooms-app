@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require('../models/user');
-const bcrypt = require("bcrypt");
-const bcryptSalt = 10;
+const Room = require('../models/room');
 
 router.get("/", (req, res, next) => {
   User.find()
@@ -19,7 +18,13 @@ router.get("/:id", (req, res, next) => {
   if (!/^[0-9a-fA-F]{24}$/.test(userId)) return res.status(404).send('not-found');
   User.findOne({ _id: userId })
     .then(user => {
-      res.render("users", { user, currentUser: req.user });
+      Room.find({ owner: user._id })
+      .then(rooms => {
+        res.render("users/details", { user, rooms });
+      })
+      .catch(error => {
+        throw new Error(error);
+      });
     })
     .catch(error => {
       throw new Error(error);

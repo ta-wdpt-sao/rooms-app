@@ -1,0 +1,33 @@
+<div class="container-fluid py-4">
+    {{#with user}}
+
+        <div class="row">
+            {{#if imageUrl}}
+                <div class="col-auto">
+                    <img src="{{imageUrl}}" class="img-thumbnail img-profile" />
+                </div>
+            {{/if}}
+            <div class="col">
+                <h1>{{fullName}}</h1>
+
+                <hr class="my-4" />
+
+                <p><a href="mailto:{{email}}">{{email}}</a></p>
+            </div>
+        </div>
+
+    {{/with}}
+</div>
+
+{{#if rooms}}
+    <div class="container-fluid py-4">
+        <h1>Rooms</h1>
+        <hr />
+
+        <div class="row">
+            {{#each rooms}}
+                {{> room}}
+            {{/each}}
+        </div>
+    </div>
+{{/if}}

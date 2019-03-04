@@ -48,7 +48,6 @@ router.post('/add', ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl')
   const location = {
     type: 'Point',
     coordinates: [req.body.longitude, req.body.latitude]
-    // coordinates: [-46.6623271, -23.5617326]
   };
 
   if (name == '') {

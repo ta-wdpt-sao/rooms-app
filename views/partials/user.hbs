@@ -2,9 +2,11 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-auto">
-                    <img src="{{imageUrl}}" class="img-thumbnail img-profile" />
-                </div>
+                {{#if imageUrl}}
+                    <div class="col-auto">
+                        <img src="{{imageUrl}}" class="img-thumbnail img-profile" />
+                    </div>
+                {{/if}}
                 <div class="col">
                     <h5 class="card-title">
                         {{fullName}}
