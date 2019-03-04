@@ -43,7 +43,7 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-app.locals.title = 'Banjo Rooms - Because a room without jazz is not a room';
+app.locals.title = 'Jazz Rooms - Because a room without jazz is not a room';
 
 // routes
 const index = require('./routes/index');
