@@ -6,6 +6,8 @@ const userSchema = new Schema({
     password: String,
     fullName: String,
     imageUrl: String,
+    token: String,
+    status: { type: String, enum: ['active', 'pending'], default: 'pending' },
     facebookID: String,
     googleID: String
 }, {

@@ -20,15 +20,15 @@ router.post("/login", passport.authenticate("local", {
 
 router.post("/signup", (req, res, next) => {
     const {
-      email,
-      password,
-      fullName,
-      imageUrl
+        fullName,
+        imageUrl,
+        email,
+        password
     } = req.body;
 
-    if (username == '' || password == '') {
+    if (email == '' || password == '') {
       res.render('auth/login', {
-        msgError: `username and password can't be empty`
+        user: {}, errorMessage: `E-mail and password can't be empty`
       });
       return;
     }
@@ -37,7 +37,7 @@ router.post("/signup", (req, res, next) => {
     .then(user => {
       if (user !== null) {
         res.render("auth/login", {
-          msgError: "The email already exists!"
+            user: {}, errorMessage: "The email already exists!"
         });
         return;
       }
@@ -46,11 +46,10 @@ router.post("/signup", (req, res, next) => {
       const hashPass = bcrypt.hashSync(password, salt);
   
       const newUser = new User({
-        email,
-        password: hashPass,
         fullName,
-        description,
-        imageUrl
+        imageUrl,
+        email,
+        password: hashPass
       });
   
       newUser.save()

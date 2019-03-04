@@ -1,4 +1,8 @@
 <div class="container py-5">
+    {{#if errorMessage}}
+        <div class="alert alert-danger mb-5">{{ errorMessage }}</div>
+    {{/if}}
+
     <div class="row">
         <div class="col-5">
             <form action="/login" method="POST" id="form">
@@ -14,10 +18,6 @@
                     <input class="form-control" type="password" id="login-password" name="password" placeholder="insert your password">
                 </div>
 
-                {{#if errorMessage }}
-                    <div class="alert alert-danger">{{ errorMessage }}</div>
-                {{/if}}
-
                 <div class="form-group">
                     <button class="btn btn-primary btn-block">Login</button>
                 </div>
@@ -30,10 +30,10 @@
 
                 {{#with user}}
                     <div class="form-group">
-                        <label for="fullname">Full Name</label><br>
-                        <input type="text" class="form-control" name="fullname"
+                        <label for="fullName">Full Name</label><br>
+                        <input type="text" class="form-control" name="fullName"
                             placeholder="add your Name"
-                            value="{{name}}">        
+                            value="{{name}}">
                     </div>
 
                     <div class="form-group">
@@ -57,11 +57,7 @@
                             placeholder="create your password">
                     </div>
 
-                    {{#if msgError}}
-                        <div class="alert alert-danger">{{ msgError }}</div>
-                    {{/if}}
-
-                    <button class="btn btn-primary btn-block">{{#if _id}}edit{{else}}add{{/if}} user</button>
+                    <button class="btn btn-primary btn-block">Sign up</button>
                 {{/with}}
             </form>
         </div>
