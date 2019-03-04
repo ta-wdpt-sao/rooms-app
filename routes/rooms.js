@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const ensureLogin = require("connect-ensure-login");
 const Room = require('../models/room');
 const uploadCloud = require('../config/cloudinary.js');
 const cloudinary = require('cloudinary');
@@ -9,7 +10,7 @@ router.get('/', (req, res, next) => {
   Room.find({})
     .then(rooms => {
       rooms.forEach(room => {
-        if(room.owner && room.owner.equals(req.user._id)) {
+        if(req.user && room.owner && room.owner.equals(req.user._id)) {
           room.owned = true;
         }
 
@@ -28,13 +29,13 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/add', (req, res, next) => {
+router.get('/add', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let room = new Room();
   room._id = null;
   res.render('rooms/form', { room });
 });
 
-router.post('/add', uploadCloud.single('imageUrl'), (req, res, next) => {
+router.post('/add', ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl'), (req, res, next) => {
   const {
     name,
     description,
@@ -85,7 +86,7 @@ router.post('/add', uploadCloud.single('imageUrl'), (req, res, next) => {
   .catch(err => { throw new Error(err)});
 });
 
-router.get('/edit/:id', (req, res, next) => {
+router.get('/edit/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const roomId = req.params.id;
 
   Room.findOne({ _id: roomId })
@@ -97,7 +98,7 @@ router.get('/edit/:id', (req, res, next) => {
     });
 });
 
-router.post("/edit", uploadCloud.single('imageUrl'), (req, res, next) => {
+router.post("/edit", ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl'), (req, res, next) => {
   const roomId = req.body._id;
 
   const {
@@ -135,7 +136,7 @@ router.post("/edit", uploadCloud.single('imageUrl'), (req, res, next) => {
     });
 });
 
-router.get('/delete/:id', (req, res, next) => {
+router.get('/delete/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let roomId = req.params.id;
 
   if (!/^[0-9a-fA-F]{24}$/.test(roomId)) return res.status(404).send('not-found');
@@ -149,7 +150,7 @@ router.get('/delete/:id', (req, res, next) => {
     });
 });
 
-router.post('/delete', (req, res, next) => {
+router.post('/delete', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let roomId = req.body._id;
 
   if (!/^[0-9a-fA-F]{24}$/.test(roomId)) return res.status(404).send('not-found');
@@ -172,6 +173,10 @@ router.get('/:id', (req, res, next) => {
     .populate('owner')
     .populate({ path: 'reviews', populate: { path: 'user' } })
     .then(room => {
+      if(req.user && room.owner && room.owner.equals(req.user._id)) {
+        room.owned = true;
+      }
+
       res.render('rooms/detail', { room });
     })
     .catch(error => {

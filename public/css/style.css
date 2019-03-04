@@ -37,4 +37,9 @@ footer {
 .rating.rating-5 i:nth-child(5) {
   color: #000; }
 
+.img-profile {
+  border-radius: 50%;
+  height: 75px;
+  width: 75px; }
+
 /*# sourceMappingURL=style.css.map */
