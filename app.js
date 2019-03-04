@@ -12,9 +12,10 @@ const http = require('http');
 const LocalStrategy = require("passport-local").Strategy;
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 const passport = require("passport");
 const path = require('path');
-const session = require("express-session");
 const nodesassmiddleware = require('node-sass-middleware');
 
 mongoose
@@ -53,7 +54,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // passport local config
 app.use(session({
   secret: "our-passport-local-strategy-app",
-  store: new MongoStore({ url: mongoose.connection }),
+  store: new MongoStore({ url: process.env.MONGODB_URI }),
   resave: true,
   saveUninitialized: true
 }));
@@ -107,6 +108,9 @@ app.use((req, res, next) => {
 
 const index = require('./routes/index');
 app.use('/', index);
+
+const auth = require('./routes/auth');
+app.use('/', auth);
 
 const rooms = require('./routes/rooms');
 app.use('/rooms', rooms);
