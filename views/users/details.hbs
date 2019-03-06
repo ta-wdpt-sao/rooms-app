@@ -8,11 +8,24 @@
                 </div>
             {{/if}}
             <div class="col">
-                <h1>{{fullName}}</h1>
+                <div class="row">
+                    <div class="col">
+                        <h1>{{fullName}}</h1>
+                    </div>
+                    {{#if owned}}
+                        <div class="col text-right">
+                            <a href="/users/edit" class="btn btn-success">
+                                Edit my profile
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                    {{/if}}
+                </div>
 
                 <hr class="my-4" />
 
                 <p><a href="mailto:{{email}}">{{email}}</a></p>
+
             </div>
         </div>
 
@@ -21,7 +34,7 @@
 
 {{#if rooms}}
     <div class="container-fluid py-4">
-        <h1>Rooms</h1>
+        <h1>Rooms by {{user.fullName}}</h1>
         <hr />
 
         <div class="row">
