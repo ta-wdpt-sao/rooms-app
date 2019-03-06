@@ -4,6 +4,7 @@ const User = require('../models/user');
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 const passport = require("passport");
+const uploadCloud = require('../config/cloudinary.js');
 
 router.get("/login", (req, res, next) => {
     let user = new User();
@@ -18,13 +19,15 @@ router.post("/login", passport.authenticate("local", {
     passReqToCallback: true
 }));
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", uploadCloud.single('imageUrl'), (req, res, next) => {
     const {
         fullName,
-        imageUrl,
         email,
         password
     } = req.body;
+
+    const imageUrl = req.file.url;
+    const imagePublicId = req.file.public_id;
 
     if (email == '' || password == '') {
       req.flash('error', 'E-mail and password can\'t be empty!')
@@ -46,6 +49,7 @@ router.post("/signup", (req, res, next) => {
       const newUser = new User({
         fullName,
         imageUrl,
+        imagePublicId,
         email,
         password: hashPass
       });
