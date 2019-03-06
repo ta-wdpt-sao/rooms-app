@@ -61,14 +61,7 @@
 
             <h2>Reviews</h2>
             {{#each reviews}}
-                <div class="card mt-2">
-                    <div class="card-body">
-                        {{> rating}}
-
-                        <p class="card-text">{{comment}}</p>
-                        <em class="text-muted">{{user.fullName}} - {{createdAt}}</em>
-                    </div>
-                </div>
+                {{> review}}
             {{/each}}
         {{/if}}
 
