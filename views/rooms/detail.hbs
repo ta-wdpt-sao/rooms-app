@@ -26,7 +26,7 @@
             <hr class="my-4" />
 
             <div class="jumbotron py-4">
-                <h2>Add a review</h2>
+                <h2>Send a review</h2>
 
                 {{#if ../currentUser}}
                     <form action="/reviews/add" method="POST">
@@ -48,10 +48,10 @@
                             <textarea class="form-control" type="text" id="comment" name="comment"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">add review</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
                     </form>
                 {{else}}
-                    <a href="/login">Login</a> to add a review.
+                    <a href="/login">Login</a> to send a review.
                 {{/if}}
             </div>
         {{/unless}}

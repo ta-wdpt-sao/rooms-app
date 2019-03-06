@@ -1,5 +1,13 @@
 body {
-  padding-bottom: 50px; }
+  padding-bottom: 56px;
+  padding-top: 50px; }
+
+.navbar {
+  left: 0;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  width: 100%; }
 
 footer {
   background: #000000;

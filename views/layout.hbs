@@ -33,18 +33,30 @@
           <li class="nav-item">
             <a class="nav-link" href="/users">Users</a>
           </li>
-          <li class="nav-item ml-lg-4">
-            {{#if currentUser}}
-              <a class="btn btn-outline-danger" href="/logout">Logout</a>
-            {{else}}
-              <a class="btn btn-outline-warning" href="/login">Login</a>
-            {{/if}}
-          </li>
         </ul>
+        <ul class="navbar-nav">
+          {{#if currentUser}}
+            <li class="nav-item ml-lg-4">
+              <a class="nav-link" href="/users/{{currentUser._id}}">
+                Hi, {{currentUser.fullName}}
+                <img src="{{currentUser.imageUrl}}" class="img-profile img-profile-xs mx-2" />
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-danger" href="/logout">Logout</a>
+            </li>
+          {{else}}
+            <li class="nav-item ml-lg-4">
+              <a class="btn btn-outline-warning" href="/login">Login</a>
+            </li>
+          {{/if}}
+        </ul>
+        <!--
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-warning my-2 my-sm-0" type="submit">Search</button>
         </form>
+        -->
       </div>
     </nav>
 
