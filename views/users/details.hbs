@@ -44,3 +44,14 @@
         </div>
     </div>
 {{/if}}
+
+{{#if rooms}}
+    <div class="container-fluid py-4">
+        <h1>Reviews by {{user.fullName}}</h1>
+        <hr />
+
+        {{#each reviews}}
+            {{> review}}
+        {{/each}}
+    </div>
+{{/if}}

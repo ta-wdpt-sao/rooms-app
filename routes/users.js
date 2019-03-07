@@ -3,6 +3,7 @@ const router = express.Router();
 const ensureLogin = require("connect-ensure-login");
 const User = require('../models/user');
 const Room = require('../models/room');
+const Review = require('../models/review');
 const uploadCloud = require('../config/cloudinary.js');
 const cloudinary = require('cloudinary');
 
@@ -78,7 +79,11 @@ router.get("/:id", (req, res, next) => {
 
       Room.find({ owner: user._id })
       .then(rooms => {
-        res.render("users/details", { user, rooms });
+        Review.find({ user: user._id })
+        .populate('user')
+        .then(reviews => {
+          res.render("users/details", { user, rooms, reviews });
+        })
       })
       .catch(error => {
         throw new Error(error);
