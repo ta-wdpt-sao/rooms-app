@@ -81,6 +81,7 @@ router.get("/:id", (req, res, next) => {
       .then(rooms => {
         Review.find({ user: user._id })
         .populate('user')
+        .populate('room')
         .then(reviews => {
           res.render("users/details", { user, rooms, reviews });
         })

@@ -4,8 +4,19 @@
 
         <p class="card-text">{{comment}}</p>
         <em class="text-muted">
-            <img src="{{user.imageUrl}}" class="img-profile img-profile-xs mr-1" />
-            {{user.fullName}} - {{createdAt}}
+            {{#if room}}
+                <a href="/rooms/{{room._id}}">
+                    <img src="{{room.imageUrl}}" class="img-profile img-profile-xs mr-1" />
+                    {{room.name}}
+                </a>
+            {{else}}
+                <a href="/users/{{user._id}}">
+                    <img src="{{user.imageUrl}}" class="img-profile img-profile-xs mr-1" />
+                    {{user.fullName}}
+                </a>
+            {{/if}}
+
+            - {{createdAt}}
         </em>
     </div>
 </div>

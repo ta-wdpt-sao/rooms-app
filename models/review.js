@@ -9,6 +9,13 @@ const reviewSchema = new Schema({
     timestamps: true
 });
 
+reviewSchema.virtual('room', {
+    ref: 'Room',
+    localField: '_id',
+    foreignField: 'reviews',
+    justOne: true
+});
+
 const Review = mongoose.model("Review", reviewSchema);
 
 module.exports = Review;
