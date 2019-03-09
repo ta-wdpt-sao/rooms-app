@@ -37,6 +37,7 @@ router.post('/add', (req, res, next) => {
 
                         Room.update({ _id: roomId }, { rating: ratingAvg, $push: { reviews: review._id }})
                             .then(book => {
+                                req.flash('success', 'Review sent successfully');
                                 res.redirect(`/rooms/${roomId}`)
                             })
                             .catch((err) => {

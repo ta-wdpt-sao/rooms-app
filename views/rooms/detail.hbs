@@ -1,6 +1,12 @@
 <div class="container py-5">
     {{#with room}}
 
+        {{#if ../msgSuccess}}
+            <div class="alert alert-success">
+                {{../msgSuccess}}
+            </div>
+        {{/if}}
+
         <div class="row">
             <div class="col-6">
                 {{#if imageUrl}}

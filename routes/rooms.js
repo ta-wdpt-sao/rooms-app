@@ -114,7 +114,7 @@ router.post("/edit", ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl'
     coordinates: [req.body.longitude, req.body.latitude]
   };
 
-  Room.update(
+  Room.findOneAndUpdate(
     { _id: roomId },
     { $set: {
       name,
@@ -125,9 +125,10 @@ router.post("/edit", ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl'
       location
      }
     },
-    { new: true } 
+    { returnNewDocument: true } 
   )
     .then(room => {
+      console.log(room)
       res.redirect('/rooms');
     })
     .catch(error => {
@@ -176,7 +177,7 @@ router.get('/:id', (req, res, next) => {
         room.owned = true;
       }
 
-      res.render('rooms/detail', { room });
+      res.render('rooms/detail', { room, msgSuccess: req.flash('success') });
     })
     .catch(error => {
       throw new Error(error);
