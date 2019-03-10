@@ -9,12 +9,10 @@ const cloudinary = require('cloudinary');
 
 router.get("/", (req, res, next) => {
   User.find()
+    .populate('rooms')
+    .populate('reviews')
     .then(users => {
       users.forEach(user => {
-        if(req.user && user.owner && user.owner.equals(req.user._id)) {
-          user.owned = true;
-        }
-
         if(user.imageUrl) {
           user.imageUrl = cloudinary.url(
             user.imagePublicId,
