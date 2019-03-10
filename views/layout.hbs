@@ -36,14 +36,17 @@
         </ul>
         <ul class="navbar-nav">
           {{#if currentUser}}
-            <li class="nav-item ml-lg-4">
-              <a class="nav-link" href="/users/{{currentUser._id}}">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hi, {{currentUser.fullName}}
                 <img src="{{currentUser.imageUrl}}" class="img-profile img-profile-xs mx-2" />
               </a>
-            </li>
-            <li class="nav-item">
-              <a class="btn btn-outline-danger" href="/logout">Logout</a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/users/{{currentUser._id}}">View profile</a>
+                <a class="dropdown-item" href="/users/edit">Edit profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="/logout">Logout</a>
+              </div>
             </li>
           {{else}}
             <li class="nav-item ml-lg-4">
