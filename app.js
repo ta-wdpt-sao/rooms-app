@@ -52,6 +52,10 @@ app.use(passportConfig);
 // default value for title local
 app.locals.title = 'Jazz Rooms - Because a room without jazz is not a room';
 
+// menu
+const menu = require('./config/menu');
+app.use(menu);
+
 // routes
 const index = require('./routes/index');
 app.use('/', index);
