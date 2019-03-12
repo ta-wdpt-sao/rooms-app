@@ -33,8 +33,10 @@ footer {
 }
 
 .rating {
-    i {
+    i,
+    a {
         color: #CCC;
+        text-decoration: none;
     }
 
     &.rating-1,
@@ -42,7 +44,7 @@ footer {
     &.rating-3,
     &.rating-4,
     &.rating-5 {
-        i:nth-child(1) {
+        :nth-child(1) {
             color: #000;
         }
     }
@@ -51,7 +53,7 @@ footer {
     &.rating-3,
     &.rating-4,
     &.rating-5 {
-        i:nth-child(2) {
+        :nth-child(2) {
             color: #000;
         }
     }
@@ -59,20 +61,20 @@ footer {
     &.rating-3,
     &.rating-4,
     &.rating-5 {
-        i:nth-child(3) {
+        :nth-child(3) {
             color: #000;
         }
     }
 
     &.rating-4,
     &.rating-5 {
-        i:nth-child(4) {
+        :nth-child(4) {
             color: #000;
         }
     }
 
     &.rating-5 {
-        i:nth-child(5) {
+        :nth-child(5) {
             color: #000;
         }
     }

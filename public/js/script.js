@@ -52,4 +52,13 @@ $(function(){
             map.fitBounds(bounds);
         }
     }
+
+    $('.rating a').click(function(e){
+        e.preventDefault();
+
+        let rating = $(this).data('rating');
+
+        $(this).parents('.rating').attr('class', 'rating rating-' + rating);
+        $(this).parents('.rating').find('input').val(rating);
+    });
 });
