@@ -40,17 +40,32 @@ footer {
 .rating.rating-1 :nth-child(1), .rating.rating-2 :nth-child(1), .rating.rating-3 :nth-child(1), .rating.rating-4 :nth-child(1), .rating.rating-5 :nth-child(1) {
   color: #000; }
 
+.rating.rating-1 a:nth-child(1), .rating.rating-2 a:nth-child(1), .rating.rating-3 a:nth-child(1), .rating.rating-4 a:nth-child(1), .rating.rating-5 a:nth-child(1) {
+  color: #007bff; }
+
 .rating.rating-2 :nth-child(2), .rating.rating-3 :nth-child(2), .rating.rating-4 :nth-child(2), .rating.rating-5 :nth-child(2) {
   color: #000; }
+
+.rating.rating-2 a:nth-child(2), .rating.rating-3 a:nth-child(2), .rating.rating-4 a:nth-child(2), .rating.rating-5 a:nth-child(2) {
+  color: #007bff; }
 
 .rating.rating-3 :nth-child(3), .rating.rating-4 :nth-child(3), .rating.rating-5 :nth-child(3) {
   color: #000; }
 
+.rating.rating-3 a:nth-child(3), .rating.rating-4 a:nth-child(3), .rating.rating-5 a:nth-child(3) {
+  color: #007bff; }
+
 .rating.rating-4 :nth-child(4), .rating.rating-5 :nth-child(4) {
   color: #000; }
 
+.rating.rating-4 a:nth-child(4), .rating.rating-5 a:nth-child(4) {
+  color: #007bff; }
+
 .rating.rating-5 :nth-child(5) {
   color: #000; }
+
+.rating.rating-5 a:nth-child(5) {
+  color: #007bff; }
 
 .img-profile {
   border-radius: 50%;

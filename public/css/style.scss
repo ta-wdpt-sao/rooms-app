@@ -53,6 +53,10 @@ footer {
         :nth-child(1) {
             color: #000;
         }
+
+        a:nth-child(1) {
+            color: #007bff;
+        }
     }
 
     &.rating-2,
@@ -62,6 +66,10 @@ footer {
         :nth-child(2) {
             color: #000;
         }
+
+        a:nth-child(2) {
+            color: #007bff;
+        }
     }
         
     &.rating-3,
@@ -70,6 +78,10 @@ footer {
         :nth-child(3) {
             color: #000;
         }
+
+        a:nth-child(3) {
+            color: #007bff;
+        }
     }
 
     &.rating-4,
@@ -77,11 +89,19 @@ footer {
         :nth-child(4) {
             color: #000;
         }
+
+        a:nth-child(4) {
+            color: #007bff;
+        }
     }
 
     &.rating-5 {
         :nth-child(5) {
             color: #000;
+        }
+
+        a:nth-child(5) {
+            color: #007bff;
         }
     }
 }
