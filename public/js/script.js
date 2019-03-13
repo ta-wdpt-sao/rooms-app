@@ -53,10 +53,22 @@ $(function(){
         }
     }
 
+    var oldRating = 1;
+    $('.rating a').hover(function(e){
+        oldRating = $(this).parents('.rating').find('input').val();
+
+        let rating = $(this).data('rating');
+
+        $(this).parents('.rating').attr('class', 'rating rating-' + rating);
+    }, function(){
+        $(this).parents('.rating').attr('class', 'rating rating-' + oldRating);
+    });
+
     $('.rating a').click(function(e){
         e.preventDefault();
 
         let rating = $(this).data('rating');
+        oldRating = rating;
 
         $(this).parents('.rating').attr('class', 'rating rating-' + rating);
         $(this).parents('.rating').find('input').val(rating);
