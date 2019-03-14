@@ -36,7 +36,7 @@ router.post('/add', (req, res, next) => {
                         let ratingAvg = Math.floor(ratingTotal / (room.reviews.length + 1));
 
                         Room.update({ _id: roomId }, { rating: ratingAvg, $push: { reviews: review._id }})
-                            .then(book => {
+                            .then(room => {
                                 req.flash('success', 'Review sent successfully');
                                 res.redirect(`/rooms/${roomId}`)
                             })
