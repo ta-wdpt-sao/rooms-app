@@ -73,4 +73,9 @@ $(function(){
         $(this).parents('.rating').attr('class', 'rating rating-' + rating);
         $(this).parents('.rating').find('input').val(rating);
     });
+
+    $('[data-target="#deleteModal"]').click(function(e){
+        $('#deleteModal-id').val($(this).data('id'));
+        $('#deleteModal-title').text($(this).data('title'));
+    });
 });

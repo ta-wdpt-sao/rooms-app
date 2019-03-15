@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
         }
       });
 
-      res.render('rooms/index', { rooms });
+      res.render('rooms/index', { rooms, successMessage: req.flash('success') });
     })
     .catch(error => {
       throw new Error(error);
@@ -136,20 +136,6 @@ router.post("/edit", ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl'
     });
 });
 
-router.get('/delete/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
-  let roomId = req.params.id;
-
-  if (!/^[0-9a-fA-F]{24}$/.test(roomId)) return res.status(404).send('not-found');
-
-  Room.findOne({ _id: roomId })
-    .then(room => {
-      res.render('rooms/delete', { room });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-});
-
 router.post('/delete', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let roomId = req.body._id;
 
@@ -157,7 +143,8 @@ router.post('/delete', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
   Room.deleteOne({ _id: roomId })
     .then(room => {
-      res.render("rooms/delete", { message: `room ${room.name} deleted!` });    
+      req.flash('success', `Room deleted!`)
+      res.redirect('/rooms');
     })
     .catch(err => {
       throw new Error(err);

@@ -1,4 +1,8 @@
 <div class="container-fluid pt-4">
+    {{#if successMessage}}
+        <div class="alert alert-success mb-5">{{ successMessage }}</div>
+    {{/if}}
+
     <div class="row">
         <div class="col-8">
             <h1>Rooms</h1>

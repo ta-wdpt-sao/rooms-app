@@ -17,7 +17,7 @@
         {{#if owned}}
             <div class="card-footer">
                 <a href="/rooms/edit/{{_id}}" class="btn btn-secondary btn-sm">Edit</a>
-                <a href="/rooms/delete/{{_id}}" class="btn btn-outline-dark btn-sm float-right">Delete</a>
+                <a href="#" class="btn btn-outline-dark btn-sm float-right" data-toggle="modal" data-target="#deleteModal" data-id="{{_id}}" data-title="{{name}}">Delete</a>
             </div>
         {{/if}}
         <input type="hidden" class="map-marker" data-lat="{{location.coordinates.[1]}}" data-lng="{{location.coordinates.[0]}}">
