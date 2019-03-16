@@ -42,9 +42,6 @@ router.post('/add', ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl')
     address
   } = req.body;
 
-  const imageUrl = req.file.url;
-  const imagePublicId = req.file.public_id;
-
   const location = {
     type: 'Point',
     coordinates: [req.body.longitude, req.body.latitude]
@@ -57,6 +54,19 @@ router.post('/add', ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl')
     return;
   }
 
+  const roomData = {
+    name,
+    description,
+    address,
+    location,
+    owner: req.user._id
+  }
+
+  if(req.file) {
+    roomData.imageUrl = req.file.url;
+    roomData.imagePublicId = req.file.public_id;
+  }
+
   Room.findOne({ 'name': name })
   .then(room => {
     if (room !== null) {
@@ -66,15 +76,7 @@ router.post('/add', ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl')
       return;
     }
 
-    const newRoom = new Room({
-      name,
-      description,
-      imageUrl,
-      imagePublicId,
-      address,
-      location,
-      owner: req.user._id
-    });
+    const newRoom = new Room(roomData);
 
     newRoom.save()
     .then(room => {
@@ -106,25 +108,26 @@ router.post("/edit", ensureLogin.ensureLoggedIn(), uploadCloud.single('imageUrl'
     address
   } = req.body;
 
-  const imageUrl = req.file.url;
-  const imagePublicId = req.file.public_id;
-
   const location = {
     type: 'Point',
     coordinates: [req.body.longitude, req.body.latitude]
   };
 
+  const roomData = {
+    name,
+    description,
+    address,
+    location
+  };
+
+  if(req.file) {
+    roomData.imageUrl = req.file.url;
+    roomData.imagePublicId = req.file.public_id;
+  }
+
   Room.findOneAndUpdate(
     { _id: roomId },
-    { $set: {
-      name,
-      description,
-      imageUrl,
-      imagePublicId,
-      address,
-      location
-     }
-    },
+    { $set: roomData },
     { returnNewDocument: true } 
   )
     .then(room => {
